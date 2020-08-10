@@ -1,9 +1,11 @@
 // On click event on the start button\
 var startButton = document.querySelector("#start-timer");
-var secondsDisplayed = document.querySelector("#timer");
-var answersHtml = document.querySelector("#answers-list");
-var questionHtml = document.querySelector("#question");
-var nextButton = document.querySelector("#next-button");
+var timeEl = document.querySelector("time");
+var mainEl = document.getElementById("main");
+var startButton = document.getElementById("startButton");
+var timer = document.getElementById("remaining-time");
+var responses = document.getElementById("answers");
+var testscreen = document.getElementById("quiz-screen");
 var questionNum = 0;
 var quizDone = false;
 var score = 0;
@@ -42,28 +44,27 @@ var questions = [
   },
 ];
 //timer function, subtracts time on wrong answer, game ends at 0 setInterval
-$(document).ready(function () {
-  $("#next-button").on("click", function () {
-    renderAnswers();
-    //console.log("This Val: ", $(this));
-  });
-  $("#answer-list");
-});
+console.log(timer)
 
-function timer() {
- // console.log("1");
-  
-  var seconds = setInterval(function () {
-    if (secondsLeft === 0) {
-      endGame();
-    }
+var currentQuestionIndex = 0;
+var userScore = 0;
+var secondsLeft = "75";
+
+function startTime() {
+  var timerInterval = setInterval(function () {
     secondsLeft--;
-    console.log("Seconds Left: " + secondsLeft);
-    secondsDisplayed.innerHTML = secondsLeft;
+
+    timer.textContent = secondsLeft + " seconds left";
+
+    if (secondsLeft === 0) {
+      clearInterval(timerInterval);
+      testscreen.style = "display: none";
+    }
   }, 1000);
 }
+;
 function displayQuestions() {
-  var currentQuestion = questionsArray[currentQuestionIndex];
+  var currentQuestion = questions[currentQuestionIndex];
   startButton.remove();
   testscreen.innerHTML = "";
   var newEl = document.createElement("h4");

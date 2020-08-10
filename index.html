@@ -14,20 +14,44 @@ THEN I can save my initials and score -->
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="./style/start.css">
-    <script src="./script.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1,shrink-to-fit=no">
+
+
+
+    <link href="https://fonts.googleapis.com/css2?family=Sriracha&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <title>Coding Quiz</title>
+    <link rel="stylesheet" href="style.css">
+
 </head>
 
 <body>
-    <section class="container">
-        <article id="home" class="flex-center flex-column">
-            <h1>Coding Quiz</h1>
-            <a class="btn" href="./quiz.html">Start Quiz</a>
-            <a class="btn" href="./highscores.html">High Scores</a>
-        </articel>
-    </section>
+    <header>
+        <div class="row" class="text-center">
+            <div class="col-md">
+                <div class="text-center" id="Highscore">Highscore:</div>
+                <div class="text-center" id="remaining-time">Time Remaining:</div>
+            </div>
+            <div>
+            </div>
+    </header>
+    <main>
+        <div class="container">
+            <div class="jumbotron" id="quiz-screen">
+                <div class="col-md text-align-center" id="introEl">
+                </div>
+                <h5 class="text-center">CodingQuiz</h5>
+                <p id="openingPrompt">Answer the following code-related questions within the time limit. Remember that
+                    incorrect answers will penalized ten seconds!</p>
+                <button class="btn btn-primary" type="button" id="startButton">Start</button>
+            </div>
+
+            <div class="col text-align-center mt-5 text-center" id="highscore">
+                <hi>Your score:</hi>
+            </div>
+    </main>
+    <script src="./script.js"></script>
+
 </body>
 
 </html>
