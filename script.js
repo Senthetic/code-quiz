@@ -62,86 +62,39 @@ function timer() {
     secondsDisplayed.innerHTML = secondsLeft;
   }, 1000);
 }
-function renderAnswers() {
-  answersHtml.innerHTML = "";
-  if (quizDone) {
-    endGame();
-  } else {
-    questionHtml.innerHTML = questions[questionNum].text;
-    for (var i = 0; i < questions[questionNum].answers.length; i++) {
-     // console.log("Length" + questions[questionNum].answers.length);
+function displayQuestions() {
+  var currentQuestion = questionsArray[currentQuestionIndex];
+  startButton.remove();
+  testscreen.innerHTML = "";
+  var newEl = document.createElement("h4");
+  newEl.textContent = currentQuestion.question;
+  testscreen.append(newEl);
+  for (var i = 0; i < currentQuestion.answers.length; i++) {
+    var answersElement = document.createElement("button");
 
-      var currentAnswer = questions[questionNum].answers[i];
-      //console.log("CurrentAnswer " + questions[questionNum].answers[i]);
+  answersElement.setAttribute("class", "answers-i");
+  answersElement.setAttribute("class", "button btn-primary m-5 rounded-pill");
+  answersElement.setAttribute("data-index", i);
+  var quizAnswers = currentQuestion.answers[i];
+  answersElement.textContent = quizAnswers;
+  testscreen.append(answersElement);
+  answersElement.addEventListener("click", function (event) {
+    currentQuestionIndex++;
+    console.log(event.target);
+    displayQuestions();
+    var userchoice = event.target.textContent;
+    if (userchoice === currentQuestion.rightAnswer) {
 
-      var answerButton = document.createElement("button");
-      answerButton.textContent = currentAnswer;
-      answerButton.setAttribute("data-index", i);
-      //answerButton.setAttribute("class", )    styling later
-      answersHtml.appendChild(answerButton);
-      answerButton.addEventListener("click", function () {
-        checkAnswer(this.innerHTML);
-      });
+      alert("correct");
+      userScore++;
+    } else {
+      secondsLeft = secondsLeft - 10;
+      alert("incorrect");
     }
-    
-    if (questionNum === questions.length) {
-      quizDone = true;
-    }
-  }
-}
-function checkAnswer(choice) {
-    console.log(choice + "---" + questions[questionNum].rightAnswer);
-    if(choice===questions[questionNum].rightAnswer)
-    {
-        score +=100;
-
-        console.log(score);
-        questionNum++;
-        renderAnswers()
-    }
-    else{
-        questionNum++;
-
-        renderAnswers();
-        secondsLeft -= 10;
-
-
-    }
-}
-function endGame() {
-
-    //push onto array everytime new score/initial
-}
-
-//array of questions, as well as counters for right and wrong answers
-
-//display questions method
-
-//saving initials and score function
-
-startButton.addEventListener("click", timer);
-// renderAnswers();
-//nextButton.addEventListener("click", renderAnswers);
-
-//     timer();
-
-//    function renderTodos() {
-//     // Clear todoList element and update todoCountSpan
-//     todoList.innerHTML = "";
-//     todoCountSpan.textContent = todos.length;
-
-//     // Render a new li for each todo
-//     for (var i = 0; i < todos.length; i++) {
-//       var todo = todos[i];
-
-//       var li = document.createElement("li");
-//       li.textContent = todo;
-//       li.setAttribute("data-index", i);
-
-//       var button = document.createElement("button");
-//       button.textContent = "Complete";
-
-//       li.appendChild(button);
-//       todoList.appendChild(li);
-//     }
-//   }
+    console.log(userScore);
+  })
+}}
+startButton.addEventListener("click", function () {
+  displayQuestions();
+  startTime()
+});
